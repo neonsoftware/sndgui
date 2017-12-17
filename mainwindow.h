@@ -16,6 +16,9 @@ public:
     ~MainWindow();
 
 private slots:
+
+    void on_actionLoad_triggered();
+
     void on_actionAdd_triggered();
 
     void on_actionRemove_triggered();
