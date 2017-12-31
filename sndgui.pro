@@ -6,7 +6,7 @@
 
 QT       += core gui
 
-greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
+greaterThan(QT_MAJOR_VERSION, 4): QT += widgets svg
 
 TARGET = sndgui
 TEMPLATE = app
@@ -30,11 +30,15 @@ unix:LIBS += -L../sndwch/build/src -L/usr/local/opt/libyaml/lib/ -lSndwch -lxml2
 SOURCES += \
         main.cpp \
         mainwindow.cpp \
-    loaddialog.cpp
+    loaddialog.cpp \
+    editdialog.cpp \
+    BasicXMLSyntaxHighlighter.cpp
 
 HEADERS += \
         mainwindow.h \
-    loaddialog.h
+    loaddialog.h \
+    editdialog.h \
+    BasicXMLSyntaxHighlighter.h
 
 FORMS += \
         mainwindow.ui

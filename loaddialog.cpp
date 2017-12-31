@@ -3,6 +3,7 @@
 
 LoadDialog::LoadDialog(QWidget *parent) : QWidget(parent)
 {
+    //setWindowFlags(Qt::Window | Qt::FramelessWindowHint);
     mCfLabel.setText("Config file");
     mCfSelect.setText("...");
     mCfHl.addWidget(&mCfLabel);
