@@ -12,19 +12,33 @@ public:
     explicit EditDialog(QWidget *parent = nullptr);
 
 public slots:
-    void openFileClicked();
+    void addFile();
+    void removeFile();
+    void loadFile();
     void previewSvg();
     void saveCode();
+    void fileClicked(QListWidgetItem *item);
 
 private:
 
-    QToolButton mButtonCodeSave;
-    QToolButton mButtonCodePreview;
-    QToolButton mButtonFileOpen;
-    QPlainTextEdit mCodeEditor;
-    QSvgWidget mSVGRendered;
-    QHBoxLayout mHl;
-    QTemporaryFile mTempFile;
+    // File List
+    QListWidget *mFilesList;
+    QVBoxLayout *mFlVl;
+    QHBoxLayout *mFlHl;
+    QToolButton *mButtonAdd;
+    QToolButton *mButtonRemove;
+
+    // Editor
+    QPlainTextEdit *mCodeEditor;
+    QVBoxLayout *mCeVl;
+    QHBoxLayout *mCeHl;
+    QToolButton *mButtonSave;
+    QToolButton *mButtonPreview;
+
+    // Svg Preview
+    QSvgWidget *mSVGRendered;
+
+    // Glue
     QString mCurrentFilePath;
 };
 

@@ -32,13 +32,15 @@ SOURCES += \
         mainwindow.cpp \
     loaddialog.cpp \
     editdialog.cpp \
-    BasicXMLSyntaxHighlighter.cpp
+    BasicXMLSyntaxHighlighter.cpp \
+    style.cpp
 
 HEADERS += \
         mainwindow.h \
     loaddialog.h \
     editdialog.h \
-    BasicXMLSyntaxHighlighter.h
+    BasicXMLSyntaxHighlighter.h \
+    style.h
 
 FORMS += \
         mainwindow.ui
