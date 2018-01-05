@@ -17,6 +17,7 @@ public slots:
     void loadFile();
     void previewSvg();
     void saveCode();
+    void modified();
     void fileClicked(QListWidgetItem *item);
 
 private:
@@ -36,10 +37,13 @@ private:
     QToolButton *mButtonPreview;
 
     // Svg Preview
+    QWidget *mSVGColumn;
     QSvgWidget *mSVGRendered;
 
     // Glue
     QString mCurrentFilePath;
+
+    QMap<QString, QString> mOpenFilePaths;
 };
 
 #endif // EDITDIALOG_H

@@ -75,18 +75,18 @@ void BasicXMLSyntaxHighlighter::setRegexes()
 
 void BasicXMLSyntaxHighlighter::setFormats()
 {
-    m_xmlKeywordFormat.setForeground(Qt::blue);
-    m_xmlKeywordFormat.setFontWeight(QFont::Bold);
+    m_xmlKeywordFormat.setForeground(QColor("#F8F8F2"));
+    //m_xmlKeywordFormat.setFontWeight(QFont::Bold);
 
-    m_xmlElementFormat.setForeground(Qt::darkMagenta);
-    m_xmlElementFormat.setFontWeight(QFont::Bold);
+    m_xmlElementFormat.setForeground(QColor("#F92672"));
+    //m_xmlElementFormat.setFontWeight(QFont::Bold);
 
-    m_xmlAttributeFormat.setForeground(Qt::darkGreen);
-    m_xmlAttributeFormat.setFontWeight(QFont::Bold);
+    m_xmlAttributeFormat.setForeground(QColor("#3366FF"));
+    //m_xmlAttributeFormat.setFontWeight(QFont::Bold);
     m_xmlAttributeFormat.setFontItalic(true);
 
-    m_xmlValueFormat.setForeground(Qt::darkRed);
+    m_xmlValueFormat.setForeground(QColor("#E6DB74"));
 
-    m_xmlCommentFormat.setForeground(Qt::gray);
+    m_xmlCommentFormat.setForeground(QColor("#75715E"));
 }
 

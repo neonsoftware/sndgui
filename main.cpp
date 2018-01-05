@@ -8,9 +8,10 @@ int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
 
-    qApp->setStyle(sndgui_style.style);
-    qApp->setPalette(sndgui_style.global_palette);
-    //qApp->setStyleSheet("QToolTip { color: #ffffff; background-color: #2a82da; border: 1px solid white; }");
+    //qApp->setStyle(sndgui_style.style);
+    //qApp->setPalette(sndgui_style.global_palette);
+    //mSVGRendered->setStyleSheet("background-color: white; border:0px;");
+    qApp->setStyleSheet("QSvgWidget{background-color: white; border:1px;}");
 
     MainWindow w;
     w.show();

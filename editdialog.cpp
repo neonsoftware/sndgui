@@ -1,12 +1,15 @@
 #include "editdialog.h"
 #include "style.h"
 #include "BasicXMLSyntaxHighlighter.h"
+#include <QDebug>
 
 EditDialog::EditDialog(QWidget *parent) : QWidget(parent)
 {
 
     // File List
     mFilesList = new QListWidget;
+    mFilesList->horizontalScrollBar()->setEnabled(false);
+    mFilesList->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     mFlVl = new QVBoxLayout;
     mFlHl = new QHBoxLayout;
     mButtonAdd = new QToolButton;
@@ -31,7 +34,7 @@ EditDialog::EditDialog(QWidget *parent) : QWidget(parent)
 
     QWidget *mFlW = new QWidget;
     mFlW->setAutoFillBackground(true);
-    mFlW->setPalette(p);
+    //mFlW->setPalette(p);
     mFlHl->setContentsMargins(3,3,3,3);
     mFlHl->setSpacing(3);
     mFlHl->addWidget(mButtonAdd);
@@ -46,7 +49,7 @@ EditDialog::EditDialog(QWidget *parent) : QWidget(parent)
 
     QWidget *mCeW = new QWidget;
     mCeW->setAutoFillBackground(true);
-    mCeW->setPalette(p);
+    //mCeW->setPalette(p);
     mCeHl->addWidget(mButtonSave);
     mCeHl->addWidget(mButtonPreview);
     mCeHl->addStretch();
@@ -70,13 +73,24 @@ EditDialog::EditDialog(QWidget *parent) : QWidget(parent)
     ceW->setLayout(mCeVl);
 
     spli->setContentsMargins(0,0,0,0);
-    //spli->setHandleWidth(2);
+    spli->setHandleWidth(1);
+
+    mSVGColumn = new QWidget;
+    QVBoxLayout *vSVGl = new QVBoxLayout;
+    QHBoxLayout *hSVGl = new QHBoxLayout;
+    hSVGl->addStretch();
+    hSVGl->addWidget(mSVGRendered);
+    hSVGl->addStretch();
+    vSVGl->addStretch();
+    vSVGl->addLayout(hSVGl);
+    vSVGl->addStretch();
+    mSVGColumn->setLayout(vSVGl);
 
     spli->addWidget(flW);
     spli->addWidget(ceW);
-    spli->addWidget(mSVGRendered);
+    spli->addWidget(mSVGColumn);
 
-    mSVGRendered->setStyleSheet("background-color: white; border:0px;");
+    //mSVGRendered->setStyleSheet("background-color: white; border:0px;");
     mCodeEditor->setStyleSheet("border:0px;");
     mFilesList->setStyleSheet("border:0px;");
 
@@ -92,6 +106,8 @@ EditDialog::EditDialog(QWidget *parent) : QWidget(parent)
                      this, &EditDialog::removeFile);
     QObject::connect(mFilesList, &QListWidget::itemClicked,
                      this, &EditDialog::fileClicked);
+    QObject::connect(mCodeEditor->document(), &QTextDocument::modificationChanged,
+                     this, &EditDialog::modified);
 
     QHBoxLayout *hl = new QHBoxLayout;
     hl->setContentsMargins(0,0,0,0);
@@ -101,21 +117,39 @@ EditDialog::EditDialog(QWidget *parent) : QWidget(parent)
 }
 
 void EditDialog::addFile(){
-    mCurrentFilePath = QFileDialog::getOpenFileName();
-    if( mCurrentFilePath.size() > 0 ){
-        mFilesList->addItem(mCurrentFilePath);
+
+    foreach(QString fPath, QFileDialog::getOpenFileNames(nullptr, "Open SVG Files", QString(), "SVG Files (*.svg)")){
+        QFileInfo f(fPath);
+        if( f.size() > 0 && f.exists()){
+            QString filePath = f.absoluteFilePath();
+            QString fileName = f.fileName();
+            int num = 1;
+            while( mOpenFilePaths.contains(fileName) ){
+                fileName = f.fileName() + "(" + QString::number(num) + ")";
+            }
+            mOpenFilePaths[fileName] = filePath;
+            mFilesList->addItem(fileName);
+        }
     }
 }
 
+void EditDialog::modified(){
+    qDebug() << "modified !!!";
+    mCodeEditor->document()->isModified();
+}
+
+
 void EditDialog::removeFile(){
     for(auto item : mFilesList->selectedItems()){
+        mOpenFilePaths.remove(item->text());
         mFilesList->takeItem(mFilesList->row(item));
     }
 }
 
 void EditDialog::fileClicked(QListWidgetItem *item){
     if(item->text().size() > 0){
-        mCurrentFilePath = item->text();
+        mCurrentFilePath = mOpenFilePaths[item->text()];
+        setWindowTitle(mCurrentFilePath);
         loadFile();
     }
 }
@@ -134,7 +168,15 @@ void EditDialog::loadFile(){
 
 void EditDialog::previewSvg(){
     mSVGRendered->load(mCodeEditor->toPlainText().toUtf8());
-    mSVGRendered->setSizeIncrement(mSVGRendered->sizeHint());
+    qDebug() << "size: " << mSVGRendered->sizeHint();
+    QSize s = mSVGRendered->sizeHint();
+    float ratio = ((float)s.width())/s.height();
+    int w = mSVGColumn->size().width();
+    int h = ratio * w;
+    QSize n;
+    n.setHeight(h);
+    n.setWidth(w);
+    mSVGRendered->setFixedSize(n);
 }
 
 void EditDialog::saveCode(){
@@ -146,6 +188,7 @@ void EditDialog::saveCode(){
             o << mCodeEditor->toPlainText();
             o.flush();
             file.close();
+            mCodeEditor->document()->setModified(false);
         }
     }
 }

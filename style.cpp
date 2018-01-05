@@ -1,6 +1,6 @@
 #include "style.h"
 
-#define COL_WINDOW              "#6497b1"
+#define COL_WINDOW              "#b3cde0"
 #define COL_WINDOW_TEXT         "#03396c"
 #define COL_BASE                QColor(45,48,71)
 #define COL_ALT_BASE            "#005b96"
@@ -10,7 +10,7 @@
 #define COL_BRIGHT_TEXT         Qt::red
 #define COL_LINK                QColor(42, 130, 218)
 #define COL_HIGHLIGHT           QColor(42, 130, 218)
-#define COL_HIGHLIGHTED_TEXT    Qt::black
+#define COL_HIGHLIGHTED_TEXT    Qt::white
 
 // http://www.color-hex.com/color-palette/1294
 // #011f4b 	(1,31,75)
@@ -18,11 +18,6 @@
 // #005b96 	(0,91,150)
 // #6497b1 	(100,151,177)
 // #b3cde0 	(179,205,224)
-
-//darkPalette.setColor(QPalette::Window, QColor(255,155,13));
-//darkPalette.setColor(QPalette::WindowText, Qt::black);
-//darkPalette.setColor(QPalette::Base, QColor(45,48,71));
-//darkPalette.setColor(QPalette::AlternateBase, QColor(53,53,53));
 
 SndGuiSyle::SndGuiSyle():
     style(QStyleFactory::create("Fusion")),
