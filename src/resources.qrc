@@ -1,0 +1,10 @@
+<RCC>
+    <qresource prefix="/">
+        <file>if_plus.svg</file>
+        <file>resources/stack_1.svg</file>
+        <file>resources/stack_2.svg</file>
+        <file>resources/stack_3.svg</file>
+        <file>resources/stack_4.svg</file>
+        <file>resources/stack_5.png</file>
+    </qresource>
+</RCC>

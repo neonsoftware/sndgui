@@ -13,6 +13,7 @@ public:
 public slots:
     void selectCfClicked();
     void selectOdClicked();
+    void enableSandwich();
     void runClicked();
 
 private:
@@ -29,7 +30,7 @@ private:
     QHBoxLayout mOdHl;
 
     QHBoxLayout mRunLayout;
-    QPushButton mRunButton;
+    QToolButton mRunButton;
 
     QVBoxLayout mVl;
 };
