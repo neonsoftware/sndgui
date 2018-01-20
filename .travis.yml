@@ -8,7 +8,7 @@ before_install:
 
 install:
   - sudo apt-get install build-essential qt5-default libqt5svg5
-  - sudo apt-cache search qt5svg
+  - sudo apt-cache search qt5svg-dev
 
 script:
 
