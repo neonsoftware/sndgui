@@ -7,7 +7,7 @@ before_install:
   - git clone https://github.com/neonsoftware/sndwch.git
 
 install:
-  - sudo apt-get install build-essential qt5-default libqt5svg5
+  - sudo apt-get install build-essential qt5-default libqt5svg5-dev
   - sudo apt-cache search qt5svg-dev
 
 script:
