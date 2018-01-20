@@ -4,7 +4,7 @@ compiler: g++
 before_install:
   - sudo add-apt-repository ppa:beineri/opt-qt58-trusty -y
   - sudo apt-get update
-  - git clone git@github.com:neonsoftware/sndwch.git
+  - git clone https://github.com/neonsoftware/sndwch.git
   - cd sndwch
   - mkdir build
   - cd build
