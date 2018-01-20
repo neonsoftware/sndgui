@@ -12,6 +12,7 @@ install:
 
 script:
 
+  - ls
   - mkdir -p $HOME/lib
   - export LD_LIBRARY_PATH=$HOME/lib:$LD_LIBRARY_PATH
   - mkdir -p $HOME/bin
@@ -24,7 +25,8 @@ script:
   - make
   - make install
   - cd $HOME
-  - mkdir build
+  - ls
+  - tree ..
   - cd build
   - cmake ../src
   - make
