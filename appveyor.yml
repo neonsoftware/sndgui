@@ -1,0 +1,39 @@
+image: Visual Studio 2015
+
+# Start builds on tags only
+skip_non_tags: true
+
+environment:
+  QTDIR: C:/Qt/5.10/msvc2015_64
+  PATH: '%QTDIR%\bin;%PATH%'
+  sndgui_release_dir: '%APPVEYOR_BUILD_FOLDER%\sndgui-win-%APPVEYOR_REPO_TAG_NAME%'
+  svgedit_release_dir: '%APPVEYOR_BUILD_FOLDER%\svgedit-win-%APPVEYOR_REPO_TAG_NAME%'
+
+init:
+  - choco upgrade git -y
+  - vcpkg install libxml2:x64-windows
+
+before_build:
+  - git clone https://github.com/yaml/libyaml
+  - cd libyaml && cmake -G "Visual Studio 14 2015 Win64" -DBUILD_SHARED_LIBS=a . && cmake --build . --target install && cd ..
+  - git clone https://github.com/neonsoftware/sndwch.git
+  - cd sndwch 
+  - cmake -G "Visual Studio 14 2015 Win64" -DCMAKE_MODULE_PATH="C:/Program Files/yaml/cmake" -DCMAKE_PREFIX_PATH="c:/tools/vcpkg/installed/x64-windows;C:/Program Files/yaml" . 
+  - cmake --build . --target install && cd ..
+  - mkdir build && cd build && cmake -G "Visual Studio 14 2015 Win64" -DCMAKE_MODULE_PATH=%QTDIR%/lib/cmake -DCMAKE_PREFIX_PATH="c:/tools/vcpkg/installed/x64-windows;C:/Program Files/yaml;C:/Program Files/libsndwch;%QTDIR%" ../src && cd ..
+
+build_script:  
+  - cd build && cmake --build .
+
+after_build:
+  - mkdir "%sndgui_release_dir%"
+  - windeployqt --dir "%svgedit_release_dir%" Debug\svgeditor.exe
+  - windeployqt --dir "%sndgui_release_dir%" Debug\sndgui.exe
+  - copy "Debug\svgeditor.exe" "%svgedit_release_dir%"
+  - copy "Debug\sndgui.exe" "%sndgui_release_dir%"
+  - echo Zipping the result...
+  - 7z a "%svgedit_release_dir%.zip" "%svgedit_release_dir%"
+  - 7z a "%sndgui_release_dir%.zip" "%sndgui_release_dir%"
+
+artifacts:
+  - path: '*.zip'
