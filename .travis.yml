@@ -5,11 +5,6 @@ before_install:
   - sudo add-apt-repository ppa:beineri/opt-qt58-trusty -y
   - sudo apt-get update
   - git clone https://github.com/neonsoftware/sndwch.git
-  - cd sndwch
-  - cd build
-  - cmake ../src
-  - make
-  - make install
 
 install:
   - sudo apt-get install build-essential qt5-default
@@ -25,10 +20,10 @@ script:
   - export CPLUS_INCLUDE_PATH=$HOME/include:$CPLUS_INCLUDE_PATH
   - cd sndwch
   - cd build
-  - cmake ../src
+  - cmake .. --prefix=$HOME
   - make
   - make install
-  - cd
+  - cd $HOME
   - mkdir build
   - cd build
   - cmake ../src --prefix=$HOME 
