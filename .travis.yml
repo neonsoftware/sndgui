@@ -26,5 +26,5 @@ script:
   - cd ../../
   - mkdir build
   - cd build
-  - cmake ../src -DCMAKE_FIND_ROOT_PATH=$HOME
+  - cmake ../src -DCMAKE_PREFIX_PATH=$HOME:$CMAKE_PREFIX_PATH
   - make
