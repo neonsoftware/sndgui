@@ -26,5 +26,5 @@ script:
   - cd $HOME
   - mkdir build
   - cd build
-  - cmake ../src --prefix=$HOME 
+  - cmake ../src
   - make
