@@ -8,7 +8,7 @@ before_install:
 
 install:
   - sudo apt-get install build-essential qt5-default
-  - sudo apt-cache search qt
+  - sudo apt-cache search qt5svg
 
 script:
 
@@ -26,5 +26,5 @@ script:
   - cd ../../
   - mkdir build
   - cd build
-  - cmake ../src
+  - cmake ../src -DCMAKE_FIND_ROOT_PATH=$HOME
   - make
