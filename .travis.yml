@@ -6,7 +6,6 @@ before_install:
   - sudo apt-get update
   - git clone https://github.com/neonsoftware/sndwch.git
   - cd sndwch
-  - mkdir build
   - cd build
   - cmake ../src
   - make
