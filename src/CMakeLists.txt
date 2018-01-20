@@ -19,7 +19,7 @@ find_package(Qt5Svg)
 
 # Tell CMake to create the helloworld executable
 add_executable(sndgui main_load.cpp loaddialog.cpp resources.qrc)
-target_link_libraries(sndgui Qt5::Widgets Qt5::Svg sndwch xml2 yaml)
+target_link_libraries(sndgui Qt5::Widgets Qt5::Svg libsndwch.a xml2 yaml)
 
 add_executable(svgeditor main_editor.cpp editdialog.cpp xmlsyntax.cpp)
 target_link_libraries(svgeditor Qt5::Widgets Qt5::Svg)
