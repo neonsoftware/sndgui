@@ -15,7 +15,7 @@ addons:
 before_install:
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew update ; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install qt ; fi
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew link qt ; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew link --force qt ; fi
   - git clone https://github.com/neonsoftware/sndwch.git
 
 script:
