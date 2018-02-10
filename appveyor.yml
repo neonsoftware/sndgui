@@ -16,4 +16,8 @@ build_script:
 #  - cd build && cmake -G "Visual Studio 15 2017 Win64" .. && cmake --build .
   - git clone https://github.com/neonsoftware/sndwch.git
   - cd sndwch
-  - cd build && cmake .. && cmake --build . && ctest && make install
+  - cd build && cmake .. && cmake --build . && ctest && cmake --build . --target install
+  - cd ../..
+  - mkdir build
+  - cd build && cmake ../src && cmake --build . 
+  
