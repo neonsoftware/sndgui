@@ -29,5 +29,6 @@ build_script:
   - mkdir build
   - set PATH=%PATH_OLD%
   - echo %PATH%
+  - set CMAKE_PREFIX_PATH=%QTDIR%
   - cd build && cmake ../src && cmake --build . 
   
