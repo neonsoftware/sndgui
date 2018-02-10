@@ -10,8 +10,8 @@ environment:
 init:
   #- set QTDIR=C:\Qt\5.7\msvc2015_64
   - set QTDIR=C:\Qt\5.10.0
-  
   - set PATH=%QTDIR%\bin;%PATH%
+  - set PATH_OLD=%PATH%
   # Setup MSVC - VS 2015
   - CALL "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat" amd64
 
@@ -27,5 +27,7 @@ build_script:
   - cd build && cmake .. && cmake --build . && ctest && cmake --build . --target install
   - cd ../..
   - mkdir build
+  - set PATH=%PATH_OLD%
+  - echo %PATH%
   - cd build && cmake ../src && cmake --build . 
   
