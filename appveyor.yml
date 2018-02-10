@@ -1,4 +1,5 @@
 image: Visual Studio 2017
+platform: x64
 
 init:
   - set QTDIR=C:\Qt\5.10.0\msvc2017_64
@@ -18,9 +19,11 @@ build_script:
   - git clone https://github.com/neonsoftware/sndwch.git
   - cd sndwch
   - cd build && cmake .. && cmake --build . && ctest && cmake --build . --target install
+  - set PATH=%PATH_OLD%
+  - cmake --target install
   - cd ../..
   - mkdir build
-  - set PATH=%PATH_OLD%
   - echo %PATH%
-  - cd build && cmake -DCMAKE_PREFIX_PATH=%QTDIR%;/usr/local ../src && cmake --build . 
+  - dir \usr\local
+  - cd build && cmake -DCMAKE_PREFIX_PATH=%QTDIR%;\usr\local ../src && cmake --build . 
   
