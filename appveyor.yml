@@ -24,6 +24,6 @@ build_script:
   - cd ../..
   - mkdir build
   - echo %PATH%
-  - dir \usr\local
-  - cd build && cmake -DCMAKE_PREFIX_PATH=%QTDIR%;\usr\local ../src && cmake --build . 
+  - dir C:\cygwin64\usr\local\include\
+  - cd build && cmake -DCMAKE_PREFIX_PATH=%QTDIR%;C:\cygwin64\usr\local ../src && cmake --build . 
   
