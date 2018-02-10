@@ -19,7 +19,7 @@ build_script:
   - git clone https://github.com/neonsoftware/sndwch.git
   - cd sndwch
   - cd build && cmake .. && cmake --build . && ctest && cmake --build . --target install
-  #- set PATH=%PATH_OLD%
+  - set PATH=%PATH_OLD%
 #  - cmake --target install
   - cd ../..
   - mkdir build
