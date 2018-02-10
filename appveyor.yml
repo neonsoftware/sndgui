@@ -28,7 +28,7 @@ build_script:
   - mkdir "C:\Program Files (x86)\sndwch\include"
   - mkdir "C:\Program Files (x86)\sndwch\lib"
   - cp C:\cygwin64\usr\local\include\sndwch.h "C:\Program Files (x86)\sndwch\include"
-  - cp C:\cygwin64\usr\local\lib\sndwch.a "C:\Program Files (x86)\lib\sndwch.a"
+  - cp C:\cygwin64\usr\local\lib\libsndwch.a "C:\Program Files (x86)\lib\sndwch.a"
   - set PATH=%PATH_OLD%
 #  - cmake --target install
   - cd ../..
