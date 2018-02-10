@@ -21,6 +21,7 @@ build_script:
   - set PATH=C:\cygwin64\bin;%PATH%
   #- set PATH=%PATH%;C:\cygwin64\bin
   - echo %PATH%
+  - cd ..
   - git clone https://github.com/neonsoftware/sndwch.git
   - cd sndwch
   #- cd build && cmake -G "Visual Studio 15 2017 Win64" .. && cmake --build . --target install
