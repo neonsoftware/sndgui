@@ -20,7 +20,7 @@ build_script:
   - cd sndwch
   - cd build && cmake .. && cmake --build . && ctest && cmake --build . --target install
   - set PATH=%PATH_OLD%
-  - cmake --target install
+#  - cmake --target install
   - cd ../..
   - mkdir build
   - echo %PATH%
