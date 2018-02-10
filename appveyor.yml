@@ -7,10 +7,16 @@ environment:
     COMPILER: msvc
     VSVER: 14
 
+init:
+  - set QTDIR=C:\Qt\5.7\msvc2015_64
+  - set PATH=%QTDIR%\bin;%PATH%
+  # Setup MSVC - VS 2015
+  - CALL "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat" amd64
+
 clone_depth: 1
 
 build_script:
-  - C:\cygwin64\setup-x86_64.exe -qnNdO -R C:/cygwin64 -s http://cygwin.mirror.constant.com -l C:/cygwin/var/cache/setup -P libyaml-devel -P libxml2-devel -P libiconv-devel -P cmake -P libQt5Core-devel
+  - C:\cygwin64\setup-x86_64.exe -qnNdO -R C:/cygwin64 -s http://cygwin.mirror.constant.com -l C:/cygwin/var/cache/setup -P libyaml-devel -P libxml2-devel -P libiconv-devel -P cmake
   - set PATH=C:\cygwin64\bin;%PATH%
   - echo %PATH%
 #  - cd build && cmake -G "Visual Studio 15 2017 Win64" .. && cmake --build .
