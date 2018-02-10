@@ -18,7 +18,8 @@ build_script:
   - cmake .
   - cmake --build . --target install
   - C:\cygwin64\setup-x86_64.exe -qnNdO -R C:/cygwin64 -s http://cygwin.mirror.constant.com -l C:/cygwin/var/cache/setup -P libyaml-devel -P libxml2-devel -P libiconv-devel -P cmake
-  - set PATH=C:\cygwin64\bin;%PATH%
+  #- set PATH=C:\cygwin64\bin;%PATH%
+  - set PATH=%PATH%;C:\cygwin64\bin
   - echo %PATH%
   - git clone https://github.com/neonsoftware/sndwch.git
   - cd sndwch
