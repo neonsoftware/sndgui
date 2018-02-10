@@ -8,7 +8,9 @@ environment:
     VSVER: 14
 
 init:
-  - set QTDIR=C:\Qt\5.7\msvc2015_64
+  #- set QTDIR=C:\Qt\5.7\msvc2015_64
+  - set QTDIR=C:\Qt\5.10.0
+  
   - set PATH=%QTDIR%\bin;%PATH%
   # Setup MSVC - VS 2015
   - CALL "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat" amd64
