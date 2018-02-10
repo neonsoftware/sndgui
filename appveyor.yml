@@ -27,8 +27,10 @@ build_script:
   #- cd build && cmake -G "Visual Studio 15 2017 Win64" .. && cmake --build . --target install
   - cd build && cmake .. && cmake --build . && ctest && cmake --build . --target install
   - mkdir "C:\Program Files (x86)\sndwch\include"
+  - mkdir "C:\Program Files (x86)\Project\sndwch\include"
   - mkdir "C:\Program Files (x86)\sndwch\lib"
   - cp C:\cygwin64\usr\local\include\sndwch.h "C:\Program Files (x86)\sndwch\include"
+  - cp C:\cygwin64\usr\local\include\sndwch.h "C:\Program Files (x86)\Project\sndwch\include"
   - cp C:\cygwin64\usr\local\lib\libsndwch.a "C:\Program Files (x86)\sndwch\lib\sndwch.lib"
   - set PATH=%PATH_OLD%
 #  - cmake --target install
