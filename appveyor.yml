@@ -19,11 +19,12 @@ build_script:
   - git clone https://github.com/neonsoftware/sndwch.git
   - cd sndwch
   - cd build && cmake .. && cmake --build . && ctest && cmake --build . --target install
-  - set PATH=%PATH_OLD%
+  #- set PATH=%PATH_OLD%
 #  - cmake --target install
   - cd ../..
   - mkdir build
   - echo %PATH%
   - dir C:\cygwin64\usr\local\include\
+  - dir C:\cygwin64\usr\local\lib\
   - cd build && cmake -DCMAKE_PREFIX_PATH=%QTDIR%;C:\cygwin64\usr\local ../src && cmake --build . 
   
