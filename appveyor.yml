@@ -46,7 +46,7 @@ build_script:
   - echo %PATH%
   - dir C:\cygwin64\usr\local\include\
   - dir C:\cygwin64\usr\local\lib\
-  #- cd src && cmake -LAH && cd ..
+  - cd src && cmake -LAH && cd ..
   #- cd build && cmake -DCMAKE_PREFIX_PATH=%QTDIR% ../src -DCMAKE_GENERATOR_PLATFORM=x64 && cmake --build .
   - cd build && cmake ../src -DCMAKE_GENERATOR_PLATFORM=x64 && cmake --build . 
   
