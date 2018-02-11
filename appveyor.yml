@@ -16,6 +16,7 @@ build_script:
   - dir %QTDIR%
   - git clone https://github.com/jameskbride/cmake-hello-world
   - cd cmake-hello-world
+  - cmake -LAH 
   - cmake .
   - cmake --build . --target install
   - C:\cygwin64\setup-x86_64.exe -qnNdO -R C:/cygwin64 -s http://cygwin.mirror.constant.com -l C:/cygwin/var/cache/setup -P libyaml-devel -P libxml2-devel -P libiconv-devel -P cmake
