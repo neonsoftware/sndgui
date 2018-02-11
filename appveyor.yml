@@ -12,6 +12,7 @@ init:
 clone_depth: 1
 
 build_script:
+  - cmake --version
   - dir %QTDIR%
   - git clone https://github.com/jameskbride/cmake-hello-world
   - cd cmake-hello-world
