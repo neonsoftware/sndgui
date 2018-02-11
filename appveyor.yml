@@ -9,4 +9,4 @@ configuration:
 install:
   #- vcpkg install libxml2:x64-windows
   - git clone https://github.com/yaml/libyaml
-  - cd libyaml && cmake -DCMAKE_GENERATOR_PLATFORM=x64 . && cmake --build . --target install
+  - cd libyaml && cmake . && cmake --build . --target install
