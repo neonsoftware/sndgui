@@ -4,7 +4,7 @@ install:
   - vcpkg install libxml2:x64-windows
   - dir c:\tools\vcpkg
   - dir c:\tools\vcpkg\installed
-  - dir c:\tools\vcpkg\installed\x64-windows\include
+  - dir c:\tools\vcpkg\installed\x64-windows
   - dir c:\tools\vcpkg\installed\x64-windows\include
   - dir c:\tools\vcpkg\installed\x64-windows\include\libxml
   - git clone https://github.com/yaml/libyaml
