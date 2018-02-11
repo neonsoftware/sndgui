@@ -1,53 +1,8 @@
-image: Visual Studio 2017
+image: Visual Studio 2015
 platform:
  - x64
-
-init:
-  - set QTDIR=C:\Qt\5.10.0\msvc2017_64
-  - set PATH=%QTDIR%\bin;%PATH%
-  # Setup MSVC - VS 2015
-  - call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build\vcvars64.bat"
-  - set PATH_OLD=%PATH%
 
 clone_depth: 1
 
 build_script:
-  - cmake --version
-  - dir %QTDIR%
-  - git clone https://github.com/jameskbride/cmake-hello-world
-  - cd cmake-hello-world
-  - cmake -LAH 
-  - cmake .
-  - cmake --build . --target install
-  - C:\cygwin64\setup-x86_64.exe -qnNdO -R C:/cygwin64 -s http://cygwin.mirror.constant.com -l C:/cygwin/var/cache/setup -P libyaml-devel -P libxml2-devel -P libiconv-devel -P cmake
-  - set PATH=C:\cygwin64\bin;%PATH%
-  #- set PATH=%PATH%;C:\cygwin64\bin
-  - echo %PATH%
-  - cd ..
-  - git clone https://github.com/neonsoftware/sndwch.git
-  - cd sndwch
-  #- cd build && cmake -G "Visual Studio 15 2017 Win64" .. && cmake --build . --target install
-  - cd build && cmake .. && cmake --build . && ctest && cmake --build . --target install
-  - mkdir "C:\Program Files (x86)\sndwch\include"
-  - mkdir "C:\Program Files (x86)\Project\include"
-  - mkdir "C:\Program Files (x86)\Project\lib"
-  - mkdir "C:\Program Files (x86)\Project\sndwch"
-  - mkdir "C:\Program Files (x86)\Project\sndwch\include"
-  - mkdir "C:\Program Files (x86)\sndwch\lib"
-  - cp C:\cygwin64\usr\local\include\sndwch.h "C:\Program Files (x86)\sndwch\include"
-  - cp C:\cygwin64\usr\local\include\sndwch.h "C:\Program Files (x86)\Project\sndwch\include"
-  - cp C:\cygwin64\usr\local\include\sndwch.h "C:\Program Files (x86)\Project\include"
-  - cp C:\cygwin64\usr\local\lib\libsndwch.a "C:\Program Files (x86)\sndwch\lib\sndwch.lib"
-  - cp C:\cygwin64\usr\local\lib\libsndwch.a "C:\Program Files (x86)\Project\lib\sndwch.a"
-  #- cp C:\cygwin64\usr\local\lib\libsndwch.a "C:\Program Files (x86)\Project\lib\sndwch.lib"
-  - set PATH=%PATH_OLD%
-#  - cmake --target install
-  - cd ../..
-  - mkdir build
-  - echo %PATH%
-  - dir C:\cygwin64\usr\local\include\
-  - dir C:\cygwin64\usr\local\lib\
-  - cd src && cmake -LAH && cd ..
-  #- cd build && cmake -DCMAKE_PREFIX_PATH=%QTDIR% ../src -DCMAKE_GENERATOR_PLATFORM=x64 && cmake --build .
-  - cd build && cmake ../src -DCMAKE_GENERATOR_PLATFORM=x64 && cmake --build . 
-  
+  - vcpkg install libxml2:x64-windows
