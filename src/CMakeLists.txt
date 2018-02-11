@@ -2,6 +2,8 @@ cmake_minimum_required(VERSION 3.0)
 
 #project(sndguiproj)
 
+set(CMAKE_INSTALL_UCRT_LIBRARIES TRUE)
+
 # Find includes in corresponding build directories
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 # Instruct CMake to run moc automatically when needed.
@@ -18,6 +20,7 @@ find_package(Qt5Widgets)
 find_package(Qt5Svg)
 
 include_directories(${LIBSNDWCH_INCLUDE_DIR})
+
 
 # Tell CMake to create the helloworld executable
 add_executable(sndgui main_load.cpp loaddialog.cpp resources.qrc)
