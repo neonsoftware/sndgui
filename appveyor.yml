@@ -1,8 +1,9 @@
 image: Visual Studio 2015
+
 platform:
  - x64
 
-clone_depth: 1
-
-build_script:
-  - vcpkg install libxml2:x64-windows
+install:
+  #- vcpkg install libxml2:x64-windows
+  - git clone https://github.com/yaml/libyaml
+  - cd libyaml && cmake . && cmake --build . --target install
