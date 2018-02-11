@@ -5,8 +5,10 @@ install:
   - dir c:\tools\vcpkg
   - dir c:\tools\vcpkg\installed
   - dir c:\tools\vcpkg\installed\x64-windows\include
-  #- git clone https://github.com/yaml/libyaml
-  #- cd libyaml && cmake . && cmake --build . --target install && cd ..
-  #- git clone https://github.com/neonsoftware/sndwch.git
+  - dir c:\tools\vcpkg\installed\x64-windows\include
+  - dir c:\tools\vcpkg\installed\x64-windows\include\libxml
+  - git clone https://github.com/yaml/libyaml
+  - cd libyaml && cmake . && cmake --build . --target install && cd ..
+  - git clone https://github.com/neonsoftware/sndwch.git
   #- cd sndwch && cmake -DCMAKE_PREFIX_PATH="C:\Program Files (x86)\yaml" -DCMAKE_TOOLCHAIN_FILE=c:/tools/vcpkg/scripts/buildsystems/vcpkg.cmake . && cmake --build . --target install && cd ..
-  #- cd sndwch && cmake -DCMAKE_MODULE_PATH="C:/Program Files (x86)/yaml/cmake" . && cmake --build . --target install && cd ..
+  - cd sndwch && cmake -DCMAKE_MODULE_PATH="C:/Program Files (x86)/yaml/cmake;c:\tools\vcpkg\installed\x64-windows" . && cmake --build . --target install && cd ..
