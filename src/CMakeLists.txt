@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.0)
 
-#project(sndguiproj)
+project(sndguiproj)
 
 set(CMAKE_INSTALL_UCRT_LIBRARIES true)
 
