@@ -37,7 +37,7 @@ build_script:
   - cp C:\cygwin64\usr\local\include\sndwch.h "C:\Program Files (x86)\Project\include"
   - cp C:\cygwin64\usr\local\lib\libsndwch.a "C:\Program Files (x86)\sndwch\lib\sndwch.lib"
   - cp C:\cygwin64\usr\local\lib\libsndwch.a "C:\Program Files (x86)\Project\lib\sndwch.a"
-  - cp C:\cygwin64\usr\local\lib\libsndwch.a "C:\Program Files (x86)\Project\lib\sndwch.lib"
+  #- cp C:\cygwin64\usr\local\lib\libsndwch.a "C:\Program Files (x86)\Project\lib\sndwch.lib"
   - set PATH=%PATH_OLD%
 #  - cmake --target install
   - cd ../..

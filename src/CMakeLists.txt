@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.0)
 
 #project(sndguiproj)
 
-set(CMAKE_INSTALL_UCRT_LIBRARIES TRUE)
+set(CMAKE_INSTALL_UCRT_LIBRARIES true)
 
 # Find includes in corresponding build directories
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
