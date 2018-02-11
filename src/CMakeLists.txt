@@ -17,6 +17,8 @@ find_package(LibSndwch)
 find_package(Qt5Widgets)
 find_package(Qt5Svg)
 
+include_directories(${LIBSNDWCH_INCLUDE_DIR})
+
 # Tell CMake to create the helloworld executable
 add_executable(sndgui main_load.cpp loaddialog.cpp resources.qrc)
 target_link_libraries(sndgui Qt5::Widgets Qt5::Svg sndwch xml2 yaml)
