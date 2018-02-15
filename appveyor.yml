@@ -5,6 +5,8 @@ init:
   - set PATH=%QTDIR%\bin;%PATH%
 
 install:
+  - dir C:\Qt\5.10.0\msvc2017_64
+  - dir C:\Qt\5.10.0\msvc2017_64\cmake
   - vcpkg install libxml2:x64-windows
   - git clone https://github.com/yaml/libyaml
   - cd libyaml && cmake -G "Visual Studio 14 2015 Win64"  -DBUILD_SHARED_LIBS=a . && cmake --build . --target install && cd ..
@@ -13,7 +15,5 @@ install:
   - cmake -G "Visual Studio 14 2015 Win64" -DCMAKE_MODULE_PATH="C:/Program Files/yaml/cmake" -DCMAKE_PREFIX_PATH="c:/tools/vcpkg/installed/x64-windows;C:/Program Files/yaml" . 
   - cmake --build . --target install && cd ..
   - mkdir build
-  - dir %QTDIR%
-  - dir %QTDIR%/cmake
   - cd build && cmake -G "Visual Studio 14 2015 Win64" -DCMAKE_MODULE_PATH=%QTDIR%/cmake -DCMAKE_PREFIX_PATH="c:/tools/vcpkg/installed/x64-windows;C:/Program Files/yaml;C:/Program Files/sample;%QTDIR%" ../src
   - cmake --build . --target install && cd ..
