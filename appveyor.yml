@@ -1,14 +1,14 @@
 image: Visual Studio 2015
 
 init:
-  - set QTDIR=C:/Qt/5.10.0/msvc2017_64
+  - set QTDIR=C:/Qt/5.10.0/msvc2015_64
   - set PATH=%QTDIR%\bin;%PATH%
   - call "C:\Program Files\Microsoft SDKs\Windows\v7.1\Bin\SetEnv.cmd" /x64
   - call "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat" x86_amd64
 
 install:
-  - dir C:\Qt\5.10.0\msvc2017_64
-  - dir C:\Qt\5.10.0\msvc2017_64\cmake
+  - dir C:\Qt\5.10.0\msvc2015_64
+  - dir C:\Qt\5.10.0\msvc2015_64\cmake
   - vcpkg install libxml2:x64-windows
   - git clone https://github.com/yaml/libyaml
   - cd libyaml && cmake -G "Visual Studio 14 2015 Win64"  -DBUILD_SHARED_LIBS=a . && cmake --build . --target install && cd ..
