@@ -4,7 +4,7 @@ init:
   - dir C:\Qt\5.10.0
   - dir C:\Qt\5.10.0\msvc2015_64
   - dir C:\Qt\5.10.0\msvc2015_64\bin
-  - dir C:\Qt\5.10.0\msvc2017_64
+  - dir C:\Qt\5.10.0\msvc2015_64\lib
   - find C:\Qt\5.10.0 -name "*.cmake"
   - set QTDIR=C:/Qt/5.10.0/msvc2015_64
   - set PATH=%QTDIR%\bin;%PATH%
@@ -20,5 +20,5 @@ install:
   - cmake -G "Visual Studio 14 2015 Win64" -DCMAKE_MODULE_PATH="C:/Program Files/yaml/cmake" -DCMAKE_PREFIX_PATH="c:/tools/vcpkg/installed/x64-windows;C:/Program Files/yaml" . 
   - cmake --build . --target install && cd ..
   - mkdir build
-  - cd build && cmake -G "Visual Studio 14 2015 Win64" -DCMAKE_MODULE_PATH=%QTDIR%/cmake -DCMAKE_PREFIX_PATH="c:/tools/vcpkg/installed/x64-windows;C:/Program Files/yaml;C:/Program Files/sample;%QTDIR%" ../src
+  - cd build && cmake -G "Visual Studio 14 2015 Win64" -DCMAKE_MODULE_PATH=%QTDIR%/lib/cmake -DCMAKE_PREFIX_PATH="c:/tools/vcpkg/installed/x64-windows;C:/Program Files/yaml;C:/Program Files/sample;%QTDIR%" ../src
   - cmake --build . --target install && cd ..
