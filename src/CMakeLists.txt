@@ -15,6 +15,8 @@ set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_CURRENT_SOURCE_DIR}/../cmake)
 
 # Find the QtWidgets library
+find_package(LibXml2)
+find_package(LibYaml)
 find_package(LibSndwch)
 find_package(Qt5Widgets)
 find_package(Qt5Svg)
@@ -24,7 +26,7 @@ include_directories(${LIBSNDWCH_INCLUDE_DIR})
 
 # Tell CMake to create the helloworld executable
 add_executable(sndgui main_load.cpp loaddialog.cpp resources.qrc)
-target_link_libraries(sndgui Qt5::Widgets Qt5::Svg ${LIBSNDWCH_LIBRARIES})
+target_link_libraries(sndgui Qt5::Widgets Qt5::Svg ${LIBSNDWCH_LIBRARIES} ${LIBYAML_LIBRARIES} ${LIBXML2_LIBRARY} ${LIBXML2_LIBRARIES})
 
 add_executable(svgeditor main_editor.cpp editdialog.cpp xmlsyntax.cpp)
 target_link_libraries(svgeditor Qt5::Widgets Qt5::Svg)
