@@ -20,5 +20,26 @@ install:
   - cmake --build . --target install && cd ..
   - mkdir build
   - cd build && cmake -G "Visual Studio 14 2015 Win64" -DCMAKE_MODULE_PATH=%QTDIR%/lib/cmake -DCMAKE_PREFIX_PATH="c:/tools/vcpkg/installed/x64-windows;C:/Program Files/yaml;C:/Program Files/sample;%QTDIR%" ../src
+  - env
+
+build_script:  
+  - cmake --build .
   - dir
-  - cmake --build . && cd ..
+  - cd ..
+  - dir 
+  - mkdir sndgui-win-%APPVEYOR_REPO_TAG_NAME%
+  - cd sndgui-win-%APPVEYOR_REPO_TAG_NAME%
+  - mkdir platforms
+  - copy %QTDIR%\bin\Qt5Core.dll .
+  - copy %QTDIR%\bin\Qt5Gui.dll .
+  - copy %QTDIR%\bin\Qt5Widgets.dll .
+  - copy %QTDIR%\bin\Qt5Svg.dll .
+  - copy %QTDIR%\plugins\platforms\qwindows.dll platforms
+  - copy ..\build\Debug\svgeditor.exe .
+  - copy ..\build\Debug\sndgui.exe .
+  - echo Zipping the result...
+  - cd ..
+  - 7z a sndgui-win-%APPVEYOR_REPO_TAG_NAME%.zip sndgui-win-%APPVEYOR_REPO_TAG_NAME%
+
+artifacts:
+  - path: sndgui-win-%APPVEYOR_REPO_TAG_NAME%.zip
