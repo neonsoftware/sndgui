@@ -33,7 +33,8 @@ script:
 
 before_deploy:
 - cd ..
-- export EXP_ZIP_FILE=${TRAVIS_BUILD_DIR}${REPO}-${BUILD_ENV}-${TRAVIS_TAG}-${TRAVIS_BUILD_NUMBER}.tar.gz
+- export EXP_ZIP_FILE=${TRAVIS_BUILD_DIR}${REPO}-${TRAVIS_OS_NAME}-${TRAVIS_TAG}-${TRAVIS_BUILD_NUMBER}.tar.gz
+- echo zip file is ${EXP_ZIP_FILE} from ${TRAVIS_BUILD_DIR}
 - tar -zcf ${EXP_ZIP_FILE} ${TRAVIS_BUILD_DIR}
 
 deploy:
