@@ -5,7 +5,7 @@ os:
   - osx
 
 env:
-  - RELEASE_DIR=${TRAVIS_BUILD_DIR}/release/libsndwch-${TRAVIS_OS_NAME}-${TRAVIS_TAG} RELEASE_ARCHIVE=${RELEASE_DIR}.tar.gz
+  - RELEASE_DIR=${TRAVIS_BUILD_DIR}/release/sndgui-${TRAVIS_OS_NAME}-${TRAVIS_TAG} RELEASE_ARCHIVE=${RELEASE_DIR}.tar.gz
 
 addons:
   apt:
@@ -23,9 +23,13 @@ before_install:
   - env
 
 script:
-  - mkdir build && cd build && cmake -DCMAKE_INSTALL_PREFIX=${RELEASE_DIR} ../src && cmake --build . 
+  - mkdir build && cd build && cmake ../src && cmake --build . && cd ..
 
 before_deploy:
+  - mkdir -p ${RELEASE_DIR}/sndgui
+  - mkdir -p ${RELEASE_DIR}/svgeditor
+  - cp build/sndgui ${RELEASE_DIR}/sndgui
+  - cp build/svgeditor ${RELEASE_DIR}/svgeditor
   - cd ${RELEASE_DIR}
   - tar -zcf ${RELEASE_ARCHIVE} *
 
