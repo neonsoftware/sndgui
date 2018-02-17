@@ -30,7 +30,7 @@ before_build:
   - cd sndwch 
   - cmake -G "Visual Studio 14 2015 Win64" -DCMAKE_MODULE_PATH="C:/Program Files/yaml/cmake" -DCMAKE_PREFIX_PATH="c:/tools/vcpkg/installed/x64-windows;C:/Program Files/yaml" . 
   - cmake --build . --target install && cd ..
-  - mkdir build && cd build && cmake -G "Visual Studio 14 2015 Win64" -DCMAKE_MODULE_PATH=%QTDIR%/lib/cmake -DCMAKE_PREFIX_PATH="c:/tools/vcpkg/installed/x64-windows;C:/Program Files/yaml;C:/Program Files/sample;%QTDIR%" ../src && cd ..
+  - mkdir build && cd build && cmake -G "Visual Studio 14 2015 Win64" -DCMAKE_MODULE_PATH=%QTDIR%/lib/cmake -DCMAKE_PREFIX_PATH="c:/tools/vcpkg/installed/x64-windows;C:/Program Files/yaml;C:/Program Files/libsndwch;%QTDIR%" ../src && cd ..
   - env
 
 build_script:  
@@ -46,7 +46,7 @@ after_build:
   - copy "%QTDIR%\bin\Qt5Svg.dll" .
   - copy "%QTDIR%\plugins\platforms\qwindows.dll" "platforms"
   - cd ..
-  - xcopy "%sndgui_release_dir%" "%svgedit_release_dir%" /e /i /h
+  - xcopy "%sndgui_release_dir%" "%svgedit_release_dir%" /e
   - copy "build\Debug\svgeditor.exe" "%svgedit_release_dir%"
   - copy "build\Debug\sndgui.exe" "%sndgui_release_dir%"
   - echo Zipping the result...
