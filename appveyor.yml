@@ -46,7 +46,7 @@ after_build:
   - copy "%QTDIR%\bin\Qt5Svg.dll" .
   - copy "%QTDIR%\plugins\platforms\qwindows.dll" "platforms"
   - cd ..
-  - xcopy "%sndgui_release_dir%" "%svgedit_release_dir%" /e
+  - xcopy "%sndgui_release_dir%" "%svgedit_release_dir%" /e /S /I
   - copy "build\Debug\svgeditor.exe" "%svgedit_release_dir%"
   - copy "build\Debug\sndgui.exe" "%sndgui_release_dir%"
   - echo Zipping the result...
