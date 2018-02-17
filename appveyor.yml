@@ -1,5 +1,8 @@
 image: Visual Studio 2015
 
+# Start builds on tags only
+skip_non_tags: true
+
 init:
   - dir C:\Qt\5.10.0
   - dir C:\Qt\5.10.0\msvc2015_64
@@ -42,4 +45,4 @@ build_script:
   - 7z a sndgui-win-%APPVEYOR_REPO_TAG_NAME%.zip sndgui-win-%APPVEYOR_REPO_TAG_NAME%
 
 artifacts:
-  - path: sndgui-win-%APPVEYOR_REPO_TAG_NAME%.zip
+  - path: '*.zip'
