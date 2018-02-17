@@ -3,46 +3,55 @@ image: Visual Studio 2015
 # Start builds on tags only
 skip_non_tags: true
 
-init:
-  - dir C:\Qt\5.10.0
-  - dir C:\Qt\5.10.0\msvc2015_64
-  - dir C:\Qt\5.10.0\msvc2015_64\bin
-  - dir C:\Qt\5.10.0\msvc2015_64\lib
-  - set QTDIR=C:/Qt/5.10.0/msvc2015_64
-  - set PATH=%QTDIR%\bin;%PATH%
-  - call "C:\Program Files\Microsoft SDKs\Windows\v7.1\Bin\SetEnv.cmd" /x64
-  - call "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat" x86_amd64
+# Setup QT
+environment:
+  QTDIR: C:/Qt/5.10.0/msvc2015_64
+  PATH: '%QTDIR%\bin;%PATH%'
+  sndgui_release_dir: '%APPVEYOR_BUILD_FOLDER%\sndgui-win-%APPVEYOR_REPO_TAG_NAME%'
+  svgedit_release_dir: '%APPVEYOR_BUILD_FOLDER%\svgedit-win-%APPVEYOR_REPO_TAG_NAME%'
 
-install:
+
+init:
+#  - dir C:\Qt\5.10.0
+#  - dir C:\Qt\5.10.0\msvc2015_64
+#  - dir C:\Qt\5.10.0\msvc2015_64\bin
+#  - dir C:\Qt\5.10.0\msvc2015_64\lib
+#  - set QTDIR=C:/Qt/5.10.0/msvc2015_64
+#  - set PATH=%QTDIR%\bin;%PATH%
+#  - call "C:\Program Files\Microsoft SDKs\Windows\v7.1\Bin\SetEnv.cmd" /x64
+#  - call "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat" x86_amd64
+  # Installing libxml2 dependency
   - vcpkg install libxml2:x64-windows
+
+before_build:
   - git clone https://github.com/yaml/libyaml
   - cd libyaml && cmake -G "Visual Studio 14 2015 Win64"  -DBUILD_SHARED_LIBS=a . && cmake --build . --target install && cd ..
   - git clone https://github.com/neonsoftware/sndwch.git
   - cd sndwch 
   - cmake -G "Visual Studio 14 2015 Win64" -DCMAKE_MODULE_PATH="C:/Program Files/yaml/cmake" -DCMAKE_PREFIX_PATH="c:/tools/vcpkg/installed/x64-windows;C:/Program Files/yaml" . 
   - cmake --build . --target install && cd ..
-  - mkdir build
-  - cd build && cmake -G "Visual Studio 14 2015 Win64" -DCMAKE_MODULE_PATH=%QTDIR%/lib/cmake -DCMAKE_PREFIX_PATH="c:/tools/vcpkg/installed/x64-windows;C:/Program Files/yaml;C:/Program Files/sample;%QTDIR%" ../src
+  - mkdir build && cd build && cmake -G "Visual Studio 14 2015 Win64" -DCMAKE_MODULE_PATH=%QTDIR%/lib/cmake -DCMAKE_PREFIX_PATH="c:/tools/vcpkg/installed/x64-windows;C:/Program Files/yaml;C:/Program Files/sample;%QTDIR%" ../src && cd ..
   - env
 
 build_script:  
-  - cmake --build .
-  - dir
-  - cd ..
-  - dir 
-  - mkdir sndgui-win-%APPVEYOR_REPO_TAG_NAME%
-  - cd sndgui-win-%APPVEYOR_REPO_TAG_NAME%
+  - cd build && cmake --build .
+
+after_build:
+  - mkdir "%sndgui_release_dir%"
+  - cd "%sndgui_release_dir%"
   - mkdir platforms
   - copy "%QTDIR%\bin\Qt5Core.dll" .
   - copy "%QTDIR%\bin\Qt5Gui.dll" .
   - copy "%QTDIR%\bin\Qt5Widgets.dll" .
   - copy "%QTDIR%\bin\Qt5Svg.dll" .
   - copy "%QTDIR%\plugins\platforms\qwindows.dll" "platforms"
-  - copy "..\build\Debug\svgeditor.exe" .
-  - copy "..\build\Debug\sndgui.exe" .
-  - echo Zipping the result...
   - cd ..
-  - 7z a sndgui-win-%APPVEYOR_REPO_TAG_NAME%.zip sndgui-win-%APPVEYOR_REPO_TAG_NAME%
+  - xcopy "%sndgui_release_dir%" "%svgedit_release_dir%" /e /i /h
+  - copy "build\Debug\svgeditor.exe" "%svgedit_release_dir%"
+  - copy "build\Debug\sndgui.exe" "%sndgui_release_dir%"
+  - echo Zipping the result...
+  - 7z a "%svgedit_release_dir%.zip" "%svgedit_release_dir%.zip"
+  - 7z a "%sndgui_release_dir%.zip" "%sndgui_release_dir%"
 
 artifacts:
   - path: '*.zip'
