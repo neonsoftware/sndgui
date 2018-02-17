@@ -50,7 +50,7 @@ after_build:
   - copy "build\Debug\svgeditor.exe" "%svgedit_release_dir%"
   - copy "build\Debug\sndgui.exe" "%sndgui_release_dir%"
   - echo Zipping the result...
-  - 7z a "%svgedit_release_dir%.zip" "%svgedit_release_dir%.zip"
+  - 7z a "%svgedit_release_dir%.zip" "%svgedit_release_dir%"
   - 7z a "%sndgui_release_dir%.zip" "%sndgui_release_dir%"
 
 artifacts:
