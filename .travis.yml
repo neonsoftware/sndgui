@@ -4,6 +4,9 @@ os:
   - linux
   - osx
 
+env:
+  - RELEASE_DIR=${TRAVIS_BUILD_DIR}/release/libsndwch-${TRAVIS_OS_NAME}-${TRAVIS_TAG} RELEASE_ARCHIVE=${RELEASE_DIR}.tar.gz
+
 addons:
   apt:
     packages:
@@ -16,26 +19,15 @@ before_install:
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install qt ; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew link --overwrite --force qt ; export PATH="/usr/local/opt/qt/bin:$PATH"; fi
   - git clone https://github.com/neonsoftware/sndwch.git
-
-script:
-  - pwd 
-  - cd sndwch/build
-  - cmake ..
-  - make
-  - sudo make install
-  - cd ../../
-  - mkdir build
-  - cd build
-  - echo $PATH
-  - cmake ../src
-  - make
+  - cd sndwch/build && cmake .. && cmake --build . --target install && cd ../../
   - env
 
+script:
+  - mkdir build && cd build && cmake -DCMAKE_INSTALL_PREFIX=${RELEASE_DIR} ../src && cmake --build . 
+
 before_deploy:
-- cd ..
-- export EXP_ZIP_FILE=${TRAVIS_BUILD_DIR}${REPO}-${TRAVIS_OS_NAME}-${TRAVIS_TAG}-${TRAVIS_BUILD_NUMBER}.tar.gz
-- echo zip file is ${EXP_ZIP_FILE} from ${TRAVIS_BUILD_DIR}
-- tar -zcf ${EXP_ZIP_FILE} ${TRAVIS_BUILD_DIR}
+  - cd ${RELEASE_DIR}
+  - tar -zcf ${RELEASE_ARCHIVE} *
 
 deploy:
   provider: releases
