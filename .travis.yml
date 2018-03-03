@@ -27,7 +27,9 @@ script:
 
 before_deploy:
   - mkdir -p ${RELEASE_DIR}/sndgui
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then macdeployqt build/sndgui.app -dmg ; cp build/sndgui.dmg ${RELEASE_DIR}/sndgui ; fi  
+  #- if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then  ; fi  
+  - macdeployqt build/sndgui.app -dmg
+  - cp build/sndgui.dmg ${RELEASE_DIR}/sndgui
   - if [[ "$TRAVIS_OS_NAME" != "osx" ]]; cp build/sndgui ${RELEASE_DIR}/sndgui ; fi  
   - mkdir -p ${RELEASE_DIR}/svgeditor
   #- cp build/svgeditor ${RELEASE_DIR}/svgeditor
