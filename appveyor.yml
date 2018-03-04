@@ -12,6 +12,8 @@ environment:
 init:
   - env
   - choco upgrade git -y
+  - ps: new-itemproperty -path "HKLM:\SOFTWARE\Microsoft\.NETFramework\v4.0.30319" -name "SchUseStrongCrypto" -Value 1 -PropertyType "DWord";
+  - ps: new-itemproperty -path "HKLM:\SOFTWARE\Wow6432Node\Microsoft\.NETFramework\v4.0.30319" -name "SchUseStrongCrypto" -Value 1 -PropertyType "DWord"
   - vcpkg install libxml2:x64-windows
 
 before_build:
