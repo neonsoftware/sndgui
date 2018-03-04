@@ -11,6 +11,7 @@ environment:
 
 init:
   - env
+  - choco upgrade git -y
   - vcpkg install libxml2:x64-windows
 
 before_build:
