@@ -31,7 +31,7 @@ build_script:
 
 after_build:
   - mkdir "%sndgui_release_dir%"
-  - "%QTDIR%\bin\windeployqt" --dir "%svgedit_release_dir%" build\Debug\svgeditor.exe
+  - windeployqt --dir "%svgedit_release_dir%" build\Debug\svgeditor.exe
   #- cd "%sndgui_release_dir%"
   #- mkdir platforms
   #- copy "%QTDIR%\bin\Qt5Core.dll" .
