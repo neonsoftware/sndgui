@@ -31,7 +31,7 @@ build_script:
 
 after_build:
   - mkdir "%sndgui_release_dir%"
-  - windeployqt --dir "%svgedit_release_dir%" build\Debug\svgeditor.exe
+  - windeployqt --dir "%svgedit_release_dir%" Debug\svgeditor.exe
   #- cd "%sndgui_release_dir%"
   #- mkdir platforms
   #- copy "%QTDIR%\bin\Qt5Core.dll" .
@@ -41,8 +41,8 @@ after_build:
   #- copy "%QTDIR%\plugins\platforms\qwindows.dll" "platforms"
   #- cd ..
   #- xcopy "%sndgui_release_dir%" "%svgedit_release_dir%" /e /s /I
-  - copy "build\Debug\svgeditor.exe" "%svgedit_release_dir%"
-  - copy "build\Debug\sndgui.exe" "%sndgui_release_dir%"
+  - copy "Debug\svgeditor.exe" "%svgedit_release_dir%"
+  - copy "Debug\sndgui.exe" "%sndgui_release_dir%"
   - echo Zipping the result...
   - 7z a "%svgedit_release_dir%.zip" "%svgedit_release_dir%"
   - 7z a "%sndgui_release_dir%.zip" "%sndgui_release_dir%"
