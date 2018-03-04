@@ -39,5 +39,10 @@ set_target_properties(sndgui PROPERTIES
 
 target_link_libraries(sndgui Qt5::Widgets Qt5::Svg ${LIBSNDWCH_LIBRARIES} ${LIBYAML_LIBRARIES} ${LIBXML2_LIBRARY} ${LIBXML2_LIBRARIES})
 
-#add_executable(svgeditor main_editor.cpp editdialog.cpp xmlsyntax.cpp)
-#target_link_libraries(svgeditor Qt5::Widgets Qt5::Svg)
+add_executable(svgeditor main_editor.cpp editdialog.cpp xmlsyntax.cpp ../icons/light.icns)
+
+set_target_properties(svgeditor PROPERTIES
+  RESOURCE ../icons/light.icns
+)
+
+target_link_libraries(svgeditor Qt5::Widgets Qt5::Svg)

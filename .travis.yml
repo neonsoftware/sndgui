@@ -26,13 +26,12 @@ script:
   - mkdir build && cd build && cmake ../src && cmake --build . && cd ..
 
 before_deploy:
-  - mkdir -p ${RELEASE_DIR}/sndgui
-  #- if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then  ; fi  
-  - macdeployqt build/sndgui.app -dmg
-  - cp build/sndgui.dmg ${RELEASE_DIR}/sndgui
-  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then cp build/sndgui ${RELEASE_DIR}/sndgui ; fi  
-  - mkdir -p ${RELEASE_DIR}/svgeditor
-  #- cp build/svgeditor ${RELEASE_DIR}/svgeditor
+  - mkdir -p ${RELEASE_DIR}
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then macdeployqt build/sndgui.app -dmg ; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then macdeployqt build/svgeditor.app -dmg ; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then cp -v build/*.dmg ${RELEASE_DIR}; fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then cp build/sndgui ${RELEASE_DIR} ; fi  
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then cp build/svgeditor ${RELEASE_DIR} ; fi  
   - cd ${RELEASE_DIR}
   - tar -zcf ${RELEASE_ARCHIVE} *
 
