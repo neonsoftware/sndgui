@@ -4,6 +4,8 @@ os:
   - linux
   - osx
 
+sudo: required
+
 env:
   - RELEASE_DIR=${TRAVIS_BUILD_DIR}/release/sndgui-${TRAVIS_OS_NAME}-${TRAVIS_TAG} RELEASE_ARCHIVE=${RELEASE_DIR}.tar.gz
 
