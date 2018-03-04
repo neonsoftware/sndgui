@@ -22,7 +22,7 @@ before_install:
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install qt ; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew link --overwrite --force qt ; export PATH="/usr/local/opt/qt/bin:$PATH"; fi
   - git clone https://github.com/neonsoftware/sndwch.git
-  - cd sndwch/build && cmake .. && cmake --build . --target install && cd ../../
+  - cd sndwch/build && cmake .. && make && make install && cd ../../
   - env
 
 script:
