@@ -11,15 +11,14 @@ environment:
 
 init:
   - env
+  - ls C:/Qt/5.10.0/msvc2015_64/lib/cmake
   # as sourcefoge is down
   - choco upgrade git -y
-  #- ps: new-itemproperty -path "HKLM:\SOFTWARE\Microsoft\.NETFramework\v4.0.30319" -name "SchUseStrongCrypto" -Value 1 -PropertyType "DWord";
-  #- ps: new-itemproperty -path "HKLM:\SOFTWARE\Wow6432Node\Microsoft\.NETFramework\v4.0.30319" -name "SchUseStrongCrypto" -Value 1 -PropertyType "DWord"
   - vcpkg install libxml2:x64-windows
 
 before_build:
   - git clone https://github.com/yaml/libyaml
-  - cd libyaml && cmake -G "Visual Studio 14 2015 Win64"  -DBUILD_SHARED_LIBS=a . && cmake --build . --target install && cd ..
+  - cd libyaml && cmake -G "Visual Studio 14 2015 Win64" -DBUILD_SHARED_LIBS=a . && cmake --build . --target install && cd ..
   - git clone https://github.com/neonsoftware/sndwch.git
   - cd sndwch 
   - cmake -G "Visual Studio 14 2015 Win64" -DCMAKE_MODULE_PATH="C:/Program Files/yaml/cmake" -DCMAKE_PREFIX_PATH="c:/tools/vcpkg/installed/x64-windows;C:/Program Files/yaml" . 
