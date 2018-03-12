@@ -4,7 +4,7 @@ image: Visual Studio 2015
 skip_non_tags: true
 
 environment:
-  QTDIR: C:/Qt/5.10.0/msvc2015_64
+  QTDIR: C:/Qt/5.10/msvc2015_64
   PATH: '%QTDIR%\bin;%PATH%'
   sndgui_release_dir: '%APPVEYOR_BUILD_FOLDER%\sndgui-win-%APPVEYOR_REPO_TAG_NAME%'
   svgedit_release_dir: '%APPVEYOR_BUILD_FOLDER%\svgedit-win-%APPVEYOR_REPO_TAG_NAME%'
@@ -13,9 +13,9 @@ init:
   - env
   - ls C:\
   - ls C:\Qt
-  - ls C:\Qt\5.10.0
-  - ls C:\Qt\5.10.0\msvc2015_64
-  - ls C:\Qt\5.10.0\msvc2015_64\lib\cmake
+  - ls C:\Qt\5.10
+  - ls C:\Qt\5.10\msvc2015_64
+  - ls C:\Qt\5.10\msvc2015_64\lib\cmake
   # as sourcefoge is down
   - choco upgrade git -y
   - vcpkg install libxml2:x64-windows
