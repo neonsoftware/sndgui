@@ -11,6 +11,9 @@ environment:
 
 init:
   - env
+  - ls C:\
+  - ls C:\Qt
+  - ls C:\Qt\5.10.0
   - ls C:\Qt\5.10.0\msvc2015_64
   - ls C:\Qt\5.10.0\msvc2015_64\lib\cmake
   # as sourcefoge is down
