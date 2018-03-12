@@ -13,8 +13,8 @@ init:
   - env
   # as sourcefoge is down
   - choco upgrade git -y
-  - ps: new-itemproperty -path "HKLM:\SOFTWARE\Microsoft\.NETFramework\v4.0.30319" -name "SchUseStrongCrypto" -Value 1 -PropertyType "DWord";
-  - ps: new-itemproperty -path "HKLM:\SOFTWARE\Wow6432Node\Microsoft\.NETFramework\v4.0.30319" -name "SchUseStrongCrypto" -Value 1 -PropertyType "DWord"
+  #- ps: new-itemproperty -path "HKLM:\SOFTWARE\Microsoft\.NETFramework\v4.0.30319" -name "SchUseStrongCrypto" -Value 1 -PropertyType "DWord";
+  #- ps: new-itemproperty -path "HKLM:\SOFTWARE\Wow6432Node\Microsoft\.NETFramework\v4.0.30319" -name "SchUseStrongCrypto" -Value 1 -PropertyType "DWord"
   - vcpkg install libxml2:x64-windows
 
 before_build:
@@ -32,15 +32,7 @@ build_script:
 after_build:
   - mkdir "%sndgui_release_dir%"
   - windeployqt --dir "%svgedit_release_dir%" Debug\svgeditor.exe
-  #- cd "%sndgui_release_dir%"
-  #- mkdir platforms
-  #- copy "%QTDIR%\bin\Qt5Core.dll" .
-  #- copy "%QTDIR%\bin\Qt5Gui.dll" .
-  #- copy "%QTDIR%\bin\Qt5Widgets.dll" .
-  #- copy "%QTDIR%\bin\Qt5Svg.dll" .
-  #- copy "%QTDIR%\plugins\platforms\qwindows.dll" "platforms"
-  #- cd ..
-  #- xcopy "%sndgui_release_dir%" "%svgedit_release_dir%" /e /s /I
+  - windeployqt --dir "%sndgui_release_dir%" Debug\sndgui.exe
   - copy "Debug\svgeditor.exe" "%svgedit_release_dir%"
   - copy "Debug\sndgui.exe" "%sndgui_release_dir%"
   - echo Zipping the result...
