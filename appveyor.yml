@@ -11,7 +11,7 @@ environment:
 
 init:
   - env
-  - ls C:/Qt/5.10.0/msvc2015_64/lib
+  - ls C:/Qt/5.10.0/msvc2015_64
   - ls C:/Qt/5.10.0/msvc2015_64/lib/cmake
   # as sourcefoge is down
   - choco upgrade git -y
