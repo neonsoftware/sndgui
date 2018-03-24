@@ -1,0 +1,2 @@
+QDarkStyle from https://github.com/ColinDuquesnoy/QDarkStyleSheet
+MIT licence, 2018
