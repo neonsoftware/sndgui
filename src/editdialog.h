@@ -5,6 +5,22 @@
 #include <QtWidgets>
 #include <QtSvg>
 
+#include "FileSelectorWidget.h"
+#include "SvgEditorWidget.h"
+#include "SvgPreviewWidget.h"
+
+class SvgEditorDialog : public QWidget
+{
+    Q_OBJECT
+public:
+    explicit SvgEditorDialog(QWidget *parent = nullptr);
+
+private:
+    FileSelectorWidget *mFileSelector;
+    SvgEditorWidget *mSvgEditor;
+    SvgPreviewWidget *mSvgPreviewer;
+};
+
 class EditDialog : public QWidget
 {
     Q_OBJECT
@@ -21,6 +37,8 @@ public slots:
     void fileClicked(QListWidgetItem *item);
 
 private:
+
+    void createLayouts();
 
     // File List
     QListWidget *mFilesList;

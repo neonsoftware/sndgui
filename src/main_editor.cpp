@@ -10,8 +10,11 @@ int main(int argc, char *argv[])
     QTextStream ts(&f);
     a.setStyleSheet(ts.readAll());
     
+    SvgEditorDialog s;
+    s.show();
+
     EditDialog e;
-    e.show();
+    //e.show();
     
     return a.exec();
 }

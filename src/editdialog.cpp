@@ -1,40 +1,54 @@
 #include "editdialog.h"
-//#include "style.h"
 #include "xmlsyntax.h"
 #include <QDebug>
 
-EditDialog::EditDialog(QWidget *parent) : QWidget(parent)
+SvgEditorDialog::SvgEditorDialog(QWidget *parent) : QWidget(parent),
+    mFileSelector(new FileSelectorWidget),
+    mSvgEditor(new SvgEditorWidget),
+    mSvgPreviewer(new SvgPreviewWidget)
 {
+    QSplitter *spli = new QSplitter;
+    spli->setContentsMargins(0,0,0,0);
+    spli->setHandleWidth(1);
+    spli->addWidget(mFileSelector);
+    spli->addWidget(mSvgEditor);
+    spli->addWidget(mSvgPreviewer);
 
+    QHBoxLayout *hl = new QHBoxLayout;
+    hl->setContentsMargins(0,0,0,0);
+    hl->setSpacing(0);
+    hl->addWidget(spli);
+    this->setLayout(hl);
+}
+
+EditDialog::EditDialog(QWidget *parent) : QWidget(parent),
+    mFilesList(new QListWidget),
+    mFlVl(new QVBoxLayout),
+    mFlHl(new QHBoxLayout),
+    mButtonAdd(new QToolButton),
+    mButtonRemove(new QToolButton),
+    mCodeEditor(new QPlainTextEdit),
+    mCeVl(new QVBoxLayout),
+    mCeHl(new QHBoxLayout),
+    mButtonSave(new QToolButton),
+    mButtonPreview(new QToolButton),
+    mSVGColumn(new QWidget),
+    mSVGRendered(new QSvgWidget)
+{
     // File List
-    mFilesList = new QListWidget;
     mFilesList->horizontalScrollBar()->setEnabled(false);
     mFilesList->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    mFlVl = new QVBoxLayout;
-    mFlHl = new QHBoxLayout;
-    mButtonAdd = new QToolButton;
-    mButtonRemove = new QToolButton;
+    //qDebug() << "min" << mFlVl->sizeConstraint().;
 
     // Editor
-    mCodeEditor = new QPlainTextEdit;
-    mCeVl = new QVBoxLayout;
-    mCeHl = new QHBoxLayout;
-    mButtonSave = new QToolButton;
-    mButtonPreview = new QToolButton;
-
-    mSVGRendered = new QSvgWidget;
-
     mButtonSave->setText("save");
     mButtonPreview->setText("preview");
     mButtonAdd->setText("+");
     mButtonRemove->setText("-");
 
-    //QPalette p;
-    //p.setColor(QPalette::Background, sndgui_style.col_base);
-
     QWidget *mFlW = new QWidget;
     mFlW->setAutoFillBackground(true);
-    //mFlW->setPalette(p);
+    //mFlW->setFixedWidth(00);
     mFlHl->setContentsMargins(3,3,3,3);
     mFlHl->setSpacing(3);
     mFlHl->addWidget(mButtonAdd);
@@ -43,13 +57,13 @@ EditDialog::EditDialog(QWidget *parent) : QWidget(parent)
     mFlW->setLayout(mFlHl);
 
     mFlVl->addWidget(mFilesList);
+    //mFlVl->SetFixedSize(QSize(100,300));
     mFlVl->addWidget(mFlW);
     mFlVl->setContentsMargins(0,0,0,0);
     mFlVl->setSpacing(0);
 
     QWidget *mCeW = new QWidget;
     mCeW->setAutoFillBackground(true);
-    //mCeW->setPalette(p);
     mCeHl->addWidget(mButtonSave);
     mCeHl->addWidget(mButtonPreview);
     mCeHl->addStretch();
@@ -64,7 +78,6 @@ EditDialog::EditDialog(QWidget *parent) : QWidget(parent)
     mCeVl->setSpacing(0);
 
     QSplitter *spli = new QSplitter;
-    //spli->setOrientation(Qt::Vertical);
     QWidget *flW = new QWidget;
     flW->setLayout(mFlVl);
     flW->setContentsMargins(0,0,0,0);
@@ -90,7 +103,7 @@ EditDialog::EditDialog(QWidget *parent) : QWidget(parent)
     spli->addWidget(ceW);
     spli->addWidget(mSVGColumn);
 
-    //mSVGRendered->setStyleSheet("background-color: white; border:0px;");
+    mSVGRendered->setStyleSheet("background-color: white; border:0px;");
     mCodeEditor->setStyleSheet("border:0px;");
     mFilesList->setStyleSheet("border:0px;");
 
@@ -116,6 +129,9 @@ EditDialog::EditDialog(QWidget *parent) : QWidget(parent)
     this->setLayout(hl);
 }
 
+void EditDialog::createLayouts(){
+}
+
 void EditDialog::addFile(){
 
     foreach(QString fPath, QFileDialog::getOpenFileNames(nullptr, "Open SVG Files", QString(), "SVG Files (*.svg)")){
@@ -137,7 +153,6 @@ void EditDialog::modified(){
     qDebug() << "modified !!!";
     mCodeEditor->document()->isModified();
 }
-
 
 void EditDialog::removeFile(){
     for(auto item : mFilesList->selectedItems()){
