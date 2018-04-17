@@ -41,6 +41,7 @@ SvgEditorWidget::SvgEditorWidget(QWidget *parent) : QWidget(parent),
 void SvgEditorWidget::loadFile(QString selectedFilePath){
 
     if( selectedFilePath.size() > 0 ){
+        mCurrentFilePath = selectedFilePath;
         QFile file(selectedFilePath);
         if( file.open(QFile::ReadOnly | QFile::Text) ){
             mCodeEditor->setPlainText(file.readAll());
@@ -51,7 +52,7 @@ void SvgEditorWidget::loadFile(QString selectedFilePath){
 }
 
 void SvgEditorWidget::saveCode(){
-
+  
     if( mCurrentFilePath.size() > 0 ){
         QFile file(mCurrentFilePath);
         if( file.open(QFile::WriteOnly | QFile::Text) ){

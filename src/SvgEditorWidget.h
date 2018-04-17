@@ -25,6 +25,7 @@ private:
     QHBoxLayout *mCeHl;
     QToolButton *mButtonSave;
     QToolButton *mButtonPreview;
+    QString mCurrentFilePath;
 };
 
 #endif // SVGEDITORWIDGET_H
