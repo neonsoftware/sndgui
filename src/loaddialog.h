@@ -18,21 +18,13 @@ public slots:
 
 private:
     /* CF stands for Config File */
-    QLabel mCfLabel;
-    QLineEdit mCfPath;
-    QToolButton mCfSelect;
-    QHBoxLayout mCfHl;
+    QLineEdit *mCfPath;
 
     /* OD stands for Output Directory */
-    QLabel mOdLabel;
-    QLineEdit mOdPath;
-    QToolButton mOdSelect;
-    QHBoxLayout mOdHl;
+    QLineEdit *mOdPath;
 
-    QHBoxLayout mRunLayout;
-    QToolButton mRunButton;
-
-    QVBoxLayout mVl;
+    /* TODO: use signal/slots */
+    QToolButton *mRunButton;
 };
 
 #endif // LOADDIALOG_H

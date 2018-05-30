@@ -5,36 +5,49 @@
 
 LoadDialog::LoadDialog(QWidget *parent) : QWidget(parent)
 {
-    //setWindowFlags(Qt::Window | Qt::FramelessWindowHint);
-    mCfLabel.setText("Config file");
-    mCfSelect.setText("...");
-    //mCfSelect.setFixedSize(QSize(100, 100));
-    //mCfSelect.setIcon(QIcon(":/if_plus.svg"));
-    //mCfSelect.setToolButtonStyle(Qt::ToolButtonTextUnderIcon);
-    //mCfSelect.setIconSize(QSize(100, 100));
-    //mCfHl.addWidget(&mCfLabel);
-    mCfHl.addWidget(&mCfPath);
-    mCfHl.addWidget(&mCfSelect);
 
-    mOdLabel.setText("Output directory");
-    mOdSelect.setText("...");
-    //mOdHl.addWidget(&mOdLabel);
-    mOdHl.addWidget(&mOdPath);
-    mOdHl.addWidget(&mOdSelect);
 
-    mRunButton.setText("sandwich");
-    mRunLayout.addWidget(&mRunButton);
-    mRunButton.setEnabled(false);
 
-    QObject::connect(&mCfSelect, &QToolButton::clicked,
+    QToolButton *mCfButton = new QToolButton; 
+    QToolButton *mOdButton = new QToolButton;
+    QToolButton *mRunButton = new QToolButton;
+
+    QHBoxLayout *mCfHl = new QHBoxLayout;
+    QHBoxLayout *mOdHl = new QHBoxLayout;
+
+    mCfPath = new QLineEdit;
+    mOdPath = new QLineEdit;
+    
+    mCfButton->setText("...");
+    mOdButton->setText("...");
+    
+    mCfHl->addWidget(mCfPath);
+    mCfHl->addWidget(mCfButton);
+
+    mOdHl->addWidget(mOdPath);
+    mOdHl->addWidget(mOdButton);
+
+    QFormLayout *formLayout = new QFormLayout;
+    formLayout->addRow(tr("Config file:"), mCfHl);
+    formLayout->addRow(tr("Output folder:"), mOdHl);
+    
+    mRunButton->setText("sandwich");
+    mRunButton->setEnabled(false);
+
+    QHBoxLayout *mRunLayout = new QHBoxLayout;
+    mRunLayout->addStretch();
+    mRunLayout->addWidget(mRunButton);
+
+
+    QObject::connect(mCfButton, &QToolButton::clicked,
                      this, &LoadDialog::selectCfClicked);
-    QObject::connect(&mCfSelect, &QToolButton::clicked,
+    QObject::connect(mCfButton, &QToolButton::clicked,
                      this, &LoadDialog::enableSandwich);
-    QObject::connect(&mOdSelect, &QToolButton::clicked,
+    QObject::connect(mOdButton, &QToolButton::clicked,
                      this, &LoadDialog::selectOdClicked);
-    QObject::connect(&mOdSelect, &QToolButton::clicked,
+    QObject::connect(mOdButton, &QToolButton::clicked,
                      this, &LoadDialog::enableSandwich);
-    QObject::connect(&mRunButton, &QToolButton::clicked,
+    QObject::connect(mRunButton, &QToolButton::clicked,
                      this, &LoadDialog::runClicked);
 
     QSvgWidget *svgIcon = new QSvgWidget;
@@ -49,36 +62,33 @@ LoadDialog::LoadDialog(QWidget *parent) : QWidget(parent)
 
 
     QVBoxLayout *ll = new QVBoxLayout;
-    ll->addWidget(&mCfLabel);
-    ll->addLayout(&mCfHl);
-    ll->addWidget(&mOdLabel);
-    ll->addLayout(&mOdHl);
-    ll->addLayout(iHL);
-    ll->addLayout(&mRunLayout);
-
-
+    ll->addLayout(formLayout);
+    //ll->addLayout(iHL);
+    ll->addLayout(mRunLayout);
+    ll->addStretch();
+    
     this->setLayout(ll);
 }
 
 void LoadDialog::selectCfClicked(){
     QString cf = QFileDialog::getOpenFileName();
     if( ! cf.isEmpty() )
-            mCfPath.setText(cf);
+            mCfPath->setText(cf);
 }
 
 void LoadDialog::enableSandwich(){
-    if( ! mCfPath.text().isEmpty() && ! mOdPath.text().isEmpty())
-            mRunButton.setEnabled(true);
+    if( ! mCfPath->text().isEmpty() && ! mOdPath->text().isEmpty())
+            mRunButton->setEnabled(true);
 }
 
 void LoadDialog::selectOdClicked(){
     QString od = QFileDialog::getExistingDirectory();
     if( ! od.isEmpty() )
-            mOdPath.setText(od);    
+            mOdPath->setText(od);    
 }
 
 void LoadDialog::runClicked(){
-    snd_err_t res = swc_sandwich(mCfPath.text().toStdString().c_str(), mOdPath.text().toStdString().c_str());
+    snd_err_t res = swc_sandwich(mCfPath->text().toStdString().c_str(), mOdPath->text().toStdString().c_str());
     if (res != SWC_OK)
         QMessageBox::warning(this, "result", "Error Creating.");
     else
