@@ -1,4 +1,4 @@
-#include "editdialog.h"
+#include "SvgEditDialog.h"
 #include <QApplication>
 
 int main(int argc, char *argv[])
@@ -12,9 +12,6 @@ int main(int argc, char *argv[])
     
     SvgEditorDialog s;
     s.show();
-
-    EditDialog e;
-    //e.show();
     
     return a.exec();
 }
