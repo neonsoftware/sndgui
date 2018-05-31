@@ -5,12 +5,9 @@
 
 LoadDialog::LoadDialog(QWidget *parent) : QWidget(parent)
 {
-
-
-
     QToolButton *mCfButton = new QToolButton; 
     QToolButton *mOdButton = new QToolButton;
-    QToolButton *mRunButton = new QToolButton;
+    mRunButton = new QToolButton;
 
     QHBoxLayout *mCfHl = new QHBoxLayout;
     QHBoxLayout *mOdHl = new QHBoxLayout;
@@ -38,13 +35,12 @@ LoadDialog::LoadDialog(QWidget *parent) : QWidget(parent)
     mRunLayout->addStretch();
     mRunLayout->addWidget(mRunButton);
 
-
     QObject::connect(mCfButton, &QToolButton::clicked,
                      this, &LoadDialog::selectCfClicked);
-    QObject::connect(mCfButton, &QToolButton::clicked,
-                     this, &LoadDialog::enableSandwich);
     QObject::connect(mOdButton, &QToolButton::clicked,
                      this, &LoadDialog::selectOdClicked);
+    QObject::connect(mCfButton, &QToolButton::clicked,
+                     this, &LoadDialog::enableSandwich);
     QObject::connect(mOdButton, &QToolButton::clicked,
                      this, &LoadDialog::enableSandwich);
     QObject::connect(mRunButton, &QToolButton::clicked,
@@ -92,5 +88,5 @@ void LoadDialog::runClicked(){
     if (res != SWC_OK)
         QMessageBox::warning(this, "result", "Error Creating.");
     else
-        QMessageBox::information(this, "result", "Ok !");
+      QMessageBox::information(this, "result", "Success. Files written in " + mOdPath->text());
 }

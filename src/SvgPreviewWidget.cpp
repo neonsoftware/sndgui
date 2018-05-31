@@ -13,20 +13,26 @@ SvgPreviewWidget::SvgPreviewWidget(QWidget *parent) : QWidget(parent),
     vSVGl->addLayout(hSVGl);
     vSVGl->addStretch();
     mSVGRendered->setStyleSheet("background-color: white; border:0px;");
+    mSVGRendered->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
     this->setLayout(vSVGl);
 }
 
 void SvgPreviewWidget::previewSvg(QString pSvgFile){
 
-    //mSVGRendered->load(mCodeEditor->toPlainText().toUtf8());
     mSVGRendered->load(pSvgFile);
-    qDebug() << "size: " << mSVGRendered->sizeHint();
-    QSize s = mSVGRendered->sizeHint();
-    float ratio = ((float)s.width())/s.height();
-    int w = this->size().width();
-    int h = ratio * w;
-    QSize n;
-    n.setHeight(h);
-    n.setWidth(w);
-    mSVGRendered->setFixedSize(n);
+    return;
+
+    /*
+    qDebug() << "size: " << mSVGRendered->sizeHint() << " current w" << this->size().width() << " h" << this->size().height();
+    QSize svg_original_size = mSVGRendered->sizeHint();
+
+    // TODO slightly diminish size to take borders into account.
+    QSize widget_size = this->size(); 
+    const int pixel_extra = 15;
+    float h_ratio = (float) (widget_size.height() - pixel_extra) / svg_original_size.height();
+    float w_ratio = (float) (widget_size.width() - pixel_extra ) / svg_original_size.width();
+    float ratio = std::min(w_ratio, h_ratio);    
+    qDebug() << "set: " << ratio * svg_original_size.width() << "," << ratio * svg_original_size.height();
+    mSVGRendered->setFixedSize(QSize(ratio * svg_original_size.width(), ratio * svg_original_size.height()));
+    */
 }

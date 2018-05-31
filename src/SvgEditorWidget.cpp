@@ -21,7 +21,6 @@ SvgEditorWidget::SvgEditorWidget(QWidget *parent) : QWidget(parent),
     mCeHl->setSpacing(3);
     mCeW->setLayout(mCeHl);
 
-
     mCeVl->addWidget(mCodeEditor);
     mCeVl->addWidget(mCeW);
     mCeVl->setContentsMargins(0,0,0,0);
@@ -46,7 +45,6 @@ void SvgEditorWidget::loadFile(QString selectedFilePath){
         if( file.open(QFile::ReadOnly | QFile::Text) ){
             mCodeEditor->setPlainText(file.readAll());
             file.close();
-            //previewSvg();
         }
     }
 }
@@ -61,6 +59,7 @@ void SvgEditorWidget::saveCode(){
             o.flush();
             file.close();
             mCodeEditor->document()->setModified(false);
+	    emit saved(mCurrentFilePath);
         }
     }
 }
